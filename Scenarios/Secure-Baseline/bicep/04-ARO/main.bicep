@@ -245,28 +245,8 @@ resource aroCluster 'Microsoft.RedHatOpenShift/openShiftClusters@2023-11-22' = {
 
 /* ----------------------------- Role Assignment ---------------------------- */
 
-// resource assignContributorRoleToSPForApplicationResourceGroup 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-//   name: guid(servicePrincipalObjectId, resourceGroup().id, contributorRoleResourceId)
-//   scope: resourceGroup()
-//   properties: {
-//     principalId: servicePrincipalObjectId
-//     roleDefinitionId: contributorRoleResourceId
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
-// resource assignUserAccessAdministratorRoleToSPForApplicationResourceGroup 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-//   name: guid(servicePrincipalObjectId, resourceGroup().id, userAccessAdministratorRoleResourceId)
-//   scope: resourceGroup()
-//   properties: {
-//     principalId: servicePrincipalObjectId
-//     roleDefinitionId: userAccessAdministratorRoleResourceId
-//     principalType: 'ServicePrincipal'
-//   }
-// }
-
 // Spoke Virtual Network
-module assignNetworkContributorRoleToSPForVirtualNetwork 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = if (useUdr) {
+module assignNetworkContributorRoleToSPForVirtualNetwork 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
   name: take('${deployment().name}-sp-spoke-vnet-net-contributor', 64)
   params: {
     principalId: servicePrincipalObjectId
@@ -279,7 +259,7 @@ module assignNetworkContributorRoleToSPForVirtualNetwork 'br/public:avm/ptn/auth
   }
 }
 
-module assignNetworkContributorRoleToAROResourceProviderSPForVirtualNetwork 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = if (useUdr) {
+module assignNetworkContributorRoleToAROResourceProviderSPForVirtualNetwork 'br/public:avm/ptn/authorization/resource-role-assignment:0.1.1' = {
   name: take('${deployment().name}-aro-rp-spoke-vnet-net-contributor', 64)
   params: {
     principalId: aroResourceProviderServicePrincipalObjectId
