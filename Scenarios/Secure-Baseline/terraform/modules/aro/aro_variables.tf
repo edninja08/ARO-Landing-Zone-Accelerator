@@ -95,15 +95,15 @@ variable "aro_version" {
   type        = string
   description = <<EOF
   ARO version
-  Default "4.15.35"
+  Default "4.20.15"
   EOF
-  default     = "4.15.35"
+  default     = "4.20.15"
 }
 
 variable "main_vm_size" {
   type        = string
   description = "VM size for the main, control plane VMs."
-  default     = "Standard_D8s_v3"
+  default     = "Standard_D8s_v4"
 
   validation {
     condition     = var.main_vm_size != "" && var.main_vm_size != null
@@ -114,7 +114,7 @@ variable "main_vm_size" {
 variable "worker_vm_size" {
   type        = string
   description = "VM size for the worker VMs."
-  default     = "Standard_D4s_v3"
+  default     = "Standard_D4s_v4"
 
   validation {
     condition     = var.worker_vm_size != "" && var.worker_vm_size != null
